@@ -7,6 +7,9 @@ def process(folder_path):
     """
     Process the downloaded folder and extract all RAR files in it.
     """
+    # Specify the full path to the 7-Zip executable
+    seven_zip_path = r'C:\Program Files\7-Zip\7z.exe'
+
     for root, _, files in os.walk(folder_path):
         for file in files:
             _, file_extension = os.path.splitext(file)
@@ -15,10 +18,14 @@ def process(folder_path):
                 file_path = os.path.join(root, file)
                 try:
                     # Delay before extraction (in seconds)
-                    delay = 15
+                    delay = 10
                     time.sleep(delay)
 
-                    subprocess.run(['7z', 'x', file_path, f'-o{root}'])
+                    print(f"Extracting: {file_path}")
+                    
+                    # Use the full path to 7-Zip executable
+                    subprocess.run([seven_zip_path, 'x', file_path, f'-o{root}'])
+                    
                     print(f"Extracted: {file_path}")
                 except Exception as e:
                     print(f"Error extracting {file_path}: {e}")
