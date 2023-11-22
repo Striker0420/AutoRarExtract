@@ -17,6 +17,7 @@ def process(folder_path):
             if file_extension.lower() == ".rar":
                 file_path = os.path.join(root, file)
                 try:
+                    
                     # Delay before extraction (in seconds)
                     delay = 10
                     time.sleep(delay)
@@ -27,6 +28,7 @@ def process(folder_path):
                     subprocess.run([seven_zip_path, 'x', file_path, f'-o{root}'])
                     
                     print(f"Extracted: {file_path}")
+                    break
                 except Exception as e:
                     print(f"Error extracting {file_path}: {e}")
 
